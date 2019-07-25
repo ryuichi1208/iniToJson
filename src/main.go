@@ -3,19 +3,21 @@ package main
 import (
     "fmt"
     "os"
-    "log"
+    "io/ioutil"
 )
 
 func load_ini_file(filepath string) {
     file, err := os.Open(filepath)
     if err != nil {
-	log.Fatal
+	fmt.Println("Open Error")
     }
 
+    b, err := ioutil.ReadAll(file)
+    fmt.Println(string(b))
 }
 
 /* main function */
 func main() {
-    fmt.Printf("Start")
+    fmt.Println("Start")
     load_ini_file("./test.ini")
 }
