@@ -4,9 +4,27 @@ import (
     "fmt"
     "os"
     "io/ioutil"
+    "runtime"
+    "github.com/mitchellh/go-ps"
 )
 
-func load_ini_file(filepath string) {
+/* Print setting info */
+func PrintExecInfo() {
+    pid := os.Getpid()
+    pidInfo, _ := ps.FindProcess(pid)
+    //fmt.Printf("%+v\n", pidInfo)
+    fmt.Println("==========================")
+
+    fmt.Printf("Proc : %s\n", pidInfo.Executable())
+    fmt.Printf("OS   : %s\n", runtime.GOOS)
+    fmt.Printf("PID  : %d\n", pidInfo.Pid())
+    fmt.Printf("PPID : %d\n", pidInfo.PPid())
+
+    fmt.Println("==========================")
+}
+
+/* Load config file */
+func LoadIniConfigFile(filepath string) {
     file, err := os.Open(filepath)
     if err != nil {
 	fmt.Println("Open Error")
@@ -18,6 +36,7 @@ func load_ini_file(filepath string) {
 
 /* main function */
 func main() {
+    PrintExecInfo()
     fmt.Println("Start")
-    load_ini_file("./test.ini")
+    LoadIniConfigFile("./test.ini")
 }
