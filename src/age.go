@@ -10,7 +10,9 @@ import (
 
 	"filippo.io/age/internal/age"
 	"golang.org/x/crypto/ssh/terminal"
-) decrypt(keys []string, in io.Reader, out io.Writer) {
+) 
+
+decrypt(keys []string, in io.Reader, out io.Writer) {
 	identities := []age.Identity{
 
 		&LazyScryptIdentity{passphrasePrompt},
